@@ -9,7 +9,7 @@ This script will run over ntuples created from L1Trigger/L1TTrackMatch/test/L1Tr
 *--o* = the output plot file
 
 ## plotTracks.py
-This script runs of the plot file created by anaL1TrackNtuple.py and prints them nicely
+This script runs on the plot file created by anaL1TrackNtuple.py and saves them nicely
 
 ## tfShape.py
 This script runs over a TensorFlow network file (extension .pb) and prints out the shape of the network
