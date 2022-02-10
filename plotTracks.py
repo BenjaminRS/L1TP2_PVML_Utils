@@ -45,12 +45,11 @@ gStyle.SetPadTickX(1)
 gStyle.SetPadTickY(1)
 
 ### Make plots ###
-# f=ROOT.TFile("/Users/benjamin/Library/Mobile Documents/com~apple~CloudDocs/Work/TrackTrigger/Histos.root")
-# f=ROOT.TFile("/Users/benjamin/Library/Mobile Documents/com~apple~CloudDocs/Work/TrackTrigger/HistosNew.root")
-# f=ROOT.TFile("/Users/benjamin/Library/Mobile Documents/com~apple~CloudDocs/Work/TrackTrigger/L1TObjNtuple_TTbar_NN.root")
 # fNN=ROOT.TFile("PVPlots_NN_400.root")
 # fFH=ROOT.TFile("PVPlots_FH_400.root")
 fNN=ROOT.TFile("PVPlots_NN.root")
+fQNN=ROOT.TFile("PVPlots_QNN.root")
+# fQNN=ROOT.TFile("PVPlots_QNN_temp.root")
 fFH=ROOT.TFile("PVPlots_FH.root")
 
 
@@ -155,12 +154,18 @@ fNN.cd()
 pvResNN=fNN.Get("pvRes")
 setStyle(pvResNN,2)
 
+fQNN.cd()
+pvResQNN=fQNN.Get("pvRes")
+setStyle(pvResQNN,kBlue)
+
 pvResFH.Draw("")
 pvResNN.Draw("same")
+pvResQNN.Draw("same")
 
-leg = ROOT.TLegend(0.18,0.78,0.38,0.88)
+leg = ROOT.TLegend(0.18,0.7,0.38,0.88)
 leg.AddEntry(pvResFH,"FH","l")
 leg.AddEntry(pvResNN,"NN","l")
+leg.AddEntry(pvResQNN,"QNN_TEMP","l")
 leg.SetTextFont(42)
 leg.SetTextSize(0.04)
 leg.SetMargin(0.15)
@@ -173,10 +178,26 @@ leg.Draw("hist")
 dEntpvResFH    = "Entries:\t\t"+('%.0f' % pvResFH.GetEntries())
 dMeanpvResFH   = "Mean:\t\t\t\t"+('%.3f' % pvResFH.GetMean())
 dStdDevpvResFH = "StdDev:\t"+('%.3f' % pvResFH.GetStdDev())
+print "FH:"
+print "\t",dEntpvResFH
+print "\t",dMeanpvResFH
+print "\t",dStdDevpvResFH
 
 dEntpvResNN    = "Entries:\t\t"+('%.0f' % pvResNN.GetEntries())
 dMeanpvResNN   = "Mean:\t\t\t\t"+('%.3f' % pvResNN.GetMean())
 dStdDevpvResNN = "StdDev:\t"+('%.3f' % pvResNN.GetStdDev())
+print "NN:"
+print "\t",dEntpvResNN
+print "\t",dMeanpvResNN
+print "\t",dStdDevpvResNN
+
+dEntpvResQNN    = "Entries:\t\t"+('%.0f' % pvResQNN.GetEntries())
+dMeanpvResQNN   = "Mean:\t\t\t\t"+('%.3f' % pvResQNN.GetMean())
+dStdDevpvResQNN = "StdDev:\t"+('%.3f' % pvResQNN.GetStdDev())
+print "QNN:"
+print "\t",dEntpvResQNN
+print "\t",dMeanpvResQNN
+print "\t",dStdDevpvResQNN
 
 
 ptpvResFH = TPaveText(0.68,0.77,0.88,0.88,"NDC")
@@ -205,6 +226,20 @@ ptpvResNN.SetTextColor(kRed)
 ptpvResNN.SetTextFont(42)
 ptpvResNN.SetTextSize(0.03)
 ptpvResNN.Draw("same")
+
+ptpvResQNN = TPaveText(0.68,0.55,0.88,0.66,"NDC")
+# ptpvResNN = TPaveText(0.68,0.47,0.88,0.58,"NDC")
+ptpvResQNN.AddText(dEntpvResQNN)
+ptpvResQNN.AddText(dMeanpvResQNN)
+ptpvResQNN.AddText(dStdDevpvResQNN)
+ptpvResQNN.SetBorderSize(1)
+ptpvResQNN.SetFillColor(0)
+ptpvResQNN.SetLineColor(kBlue)
+ptpvResQNN.SetTextAlign(12)
+ptpvResQNN.SetTextColor(kBlue)
+ptpvResQNN.SetTextFont(42)
+ptpvResQNN.SetTextSize(0.03)
+ptpvResQNN.Draw("same")
 
 
 plot(cPVRes,"PVRes")

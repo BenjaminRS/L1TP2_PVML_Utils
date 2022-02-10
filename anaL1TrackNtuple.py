@@ -47,7 +47,7 @@ tree = file.Get("L1TrackNtuple/eventTree")
 counter=0
 ### Go through events in the tree and loop over vectors of tracks to fill plots: ###
 for event in tree:
-    if counter>20: break
+    # if counter>20: break
     # for pt in event.trk_pt: trackPt.Fill(pt)
     # for eta in event.trk_eta: trackEta.Fill(eta)
     # for phi in event.trk_phi: trackPhi.Fill(phi)
@@ -57,9 +57,9 @@ for event in tree:
     pvMC.Fill(event.pv_MC[0])
     pvReco.Fill(event.pv_L1reco[0])
     pvRes.Fill(event.pv_MC[0]-event.pv_L1reco[0])
-    print "event.pv_MC: ", event.pv_MC[0],
-    print "\tevent.pv_L1reco: ", event.pv_L1reco[0],
-    print "\tres(MC-Reco): ", event.pv_MC[0]-event.pv_L1reco[0]
+    # print "event.pv_MC: ", event.pv_MC[0],
+    # print "\tevent.pv_L1reco: ", event.pv_L1reco[0],
+    # print "\tres(MC-Reco): ", event.pv_MC[0]-event.pv_L1reco[0]
     counter+=1
 
 outputFile.cd()
